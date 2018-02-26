@@ -39,6 +39,12 @@ public class Janela extends javax.swing.JDialog {
         setTitle("Aritmética Binária");
         setResizable(false);
 
+        valor1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                valor1ActionPerformed(evt);
+            }
+        });
+
         opcoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "+", "-" }));
 
         saida.setEditable(false);
@@ -113,10 +119,49 @@ public class Janela extends javax.swing.JDialog {
     private void enterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterActionPerformed
         if (this.opcoes.getSelectedIndex() == 0) {    //SOMA
             System.out.println("SOMA");
+            
+           String v1 = valor1.getText();
+           String v2 = valor2.getText();
+           String s= "";
+           int resto = 0;
+           
+           for(int x = v1.length()-1 ;  x>=0  ; x--){
+           
+             int  t1 = Integer.valueOf(v1.charAt(x));
+              int  t2 = Integer.valueOf(v2.charAt(x));
+               
+               
+               if(t1 + t2 == 0){
+                   s = "0" + s;
+                   resto = 0;
+               }
+               else
+                   if(t1 + t2 + resto == 1){
+                   s = "1" + s;
+                   resto = 0;
+               }
+               else
+                       if(t1 + t2 + resto == 2){
+                   s = "0" + s;
+                   resto = 1;
+               }
+               else
+                           if(t1 + t2 + resto == 3){
+                   s = "2" + s;
+                   resto = 1;
+               }
+               
+               saida.setText(s);
+           }
+           
         } else {                                      //SUBTRAÇÃO
             System.out.println("SUBTRAÇÃO");
         }
     }//GEN-LAST:event_enterActionPerformed
+
+    private void valor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valor1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_valor1ActionPerformed
 
     /**
      * @param args the command line arguments
